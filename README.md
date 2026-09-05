@@ -148,3 +148,12 @@ OpenAI 呼び出しは同時6件、待ち行列24件、論理API呼び出し12�
 `parallel_delegate` は3 worker + synthesisの最大4件分を開始時に予約します。Tool入力の
 全文字数も既定250,000文字までに制限されます。必要なら対応する `MAX_*` 環境変数で
 調整してください。
+
+## Roadmap
+
+- ChatGPT、Codex、その他MCP client向けの設定例を拡充
+- prompt本文を記録しないobservabilityと運用ガイドを拡充
+- provider interfaceを利用した追加LLM providerの検討
+- container imageの再現可能なbuild・release手順を整備
+
+提案や実装への参加方法は [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。

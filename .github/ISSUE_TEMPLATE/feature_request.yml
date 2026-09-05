@@ -1,0 +1,42 @@
+name: Feature request
+description: Propose a focused improvement
+title: "feat: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: Describe the problem first so alternatives can be evaluated together.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What limitation or use case should be addressed?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the smallest useful change and its expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: List workarounds or other approaches you considered.
+  - type: textarea
+    id: impact
+    attributes:
+      label: Security and cost impact
+      description: Note any effect on authentication, data exposure, API usage, or operating cost.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This proposal keeps the service read-only and reasoning-only.
+          required: true
