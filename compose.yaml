@@ -1,0 +1,87 @@
+x-json-logging: &json-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  sub-agent-mcp:
+    build:
+      context: .
+      target: production
+    restart: unless-stopped
+    init: true
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 1g
+    cpus: 2.0
+    logging: *json-logging
+    group_add:
+      - "${SUB_AGENT_SECRETS_GID}"
+    expose:
+      - "3000"
+    env_file:
+      - .env.production
+    environment:
+      OPENAI_API_KEY_FILE: /run/secrets/openai_api_key
+    secrets:
+      - openai_api_key
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    networks:
+      - sub-agent-net
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    pull_policy: always
+    restart: unless-stopped
+    init: true
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 256m
+    cpus: 1.0
+    logging: *json-logging
+    group_add:
+      - "${SUB_AGENT_SECRETS_GID}"
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - --token-file
+      - /run/secrets/cloudflare_tunnel_token
+    secrets:
+      - cloudflare_tunnel_token
+    depends_on:
+      sub-agent-mcp:
+        condition: service_healthy
+    networks:
+      - sub-agent-net
+
+secrets:
+  openai_api_key:
+    file: ./secrets/openai_api_key
+  cloudflare_tunnel_token:
+    file: ./secrets/cloudflare_tunnel_token
+
+networks:
+  sub-agent-net:

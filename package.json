@@ -1,0 +1,33 @@
+{
+  "name": "sub-agent-mcp",
+  "version": "1.0.0",
+  "description": "A self-hosted Remote MCP server for isolated reasoning, review, and web research.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "RUN_OPENAI_INTEGRATION=1 vitest run tests/integration/openai.test.ts",
+    "check": "npm run typecheck && npm run build && npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "2.0.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "jose": "6.2.12",
+    "openai": "7.10.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.0.0",
+    "@types/node": "24.10.1",
+    "typescript": "7.0.2",
+    "vitest": "5.0.0"
+  }
+}
