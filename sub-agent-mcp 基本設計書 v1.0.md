@@ -12,8 +12,8 @@
 
 **Production Root:** `/opt/sub-agent-mcp`
 
-**Public Host:** `subagent.full-ranges.com`
-**MCP Endpoint:** `https://subagent.full-ranges.com/mcp`
+**Public Host:** `mcp.example.com`
+**MCP Endpoint:** `https://mcp.example.com/mcp`
 
 ---
 
@@ -84,7 +84,7 @@ ChatGPT / Work / Codex
  Cloudflare Tunnel
           │
           ▼
-subagent.full-ranges.com
+mcp.example.com
           │
           ▼
      sub-agent-mcp
@@ -298,7 +298,7 @@ Remote transportはStreamable HTTPを使用する。
 正式endpoint：
 
 ```text
-POST https://subagent.full-ranges.com/mcp
+POST https://mcp.example.com/mcp
 ```
 
 旧HTTP+SSE transportを新規実装しない。
@@ -1389,8 +1389,8 @@ GET  /healthz
 正式URL：
 
 ```text
-https://subagent.full-ranges.com/mcp
-https://subagent.full-ranges.com/healthz
+https://mcp.example.com/mcp
+https://mcp.example.com/healthz
 ```
 
 ---
@@ -1458,7 +1458,7 @@ internal config
 production：
 
 ```text
-ALLOWED_HOSTS=subagent.full-ranges.com
+ALLOWED_HOSTS=mcp.example.com
 ```
 
 想定外Host headerを拒否する。
@@ -1494,7 +1494,7 @@ wildcard：
 production host：
 
 ```text
-subagent.full-ranges.com
+mcp.example.com
 ```
 
 をCloudflare Accessで保護する。
@@ -1662,7 +1662,7 @@ remotely-managed Tunnelを使用する。
 Public Hostname：
 
 ```text
-subagent.full-ranges.com
+mcp.example.com
 ```
 
 origin：
@@ -1854,7 +1854,7 @@ SUB_AGENT_MODEL=gpt-5.6-luna
 
 AUTH_MODE=cloudflare
 
-ALLOWED_HOSTS=subagent.full-ranges.com
+ALLOWED_HOSTS=mcp.example.com
 
 CLOUDFLARE_TEAM_DOMAIN=https://<team>.cloudflareaccess.com
 CLOUDFLARE_ACCESS_AUD=<audience-tag>
@@ -2101,7 +2101,7 @@ networks:
 Cloudflare Tunnel側のPublic Hostname：
 
 ```text
-subagent.full-ranges.com
+mcp.example.com
 ```
 
 Service：
@@ -2524,7 +2524,7 @@ MVP完成条件：
 20. caller disconnectでabort伝播
 21. 1 worker failureをdegraded処理
 22. 2 worker failureをerror処理
-23. `subagent.full-ranges.com`から公開
+23. `mcp.example.com`から公開
 24. origin portをInternetへ公開しない
 25. Cloudflare Tunnelのみをorigin経路とする
 26. Managed OAuthでAccess認証可能

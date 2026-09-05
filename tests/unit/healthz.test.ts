@@ -17,7 +17,7 @@ describe("health endpoint", () => {
     const provider = new FakeProvider();
     const config = testConfig({
       authMode: "cloudflare",
-      allowedHosts: ["subagent.full-ranges.com"],
+      allowedHosts: ["mcp.example.com"],
     });
     const server = createHttpServer({
       config,

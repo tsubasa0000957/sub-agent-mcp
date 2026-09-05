@@ -5,9 +5,9 @@ Host LLM から独立した推論コンテキストを呼び出す、読み取�
 
 Self-hosted Remote MCP server for isolated reasoning, review, and optional web research.
 
-運用中のエンドポイント: `https://subagent.full-ranges.com/mcp`
+エンドポイント例: `https://mcp.example.com/mcp`
 
-このエンドポイントは Cloudflare Access 認証が必要で、公開デモではありません。
+実運用のエンドポイントには Cloudflare Access 認証を適用してください。
 
 ## 特徴
 
@@ -124,7 +124,7 @@ ssh your-server 'cd /opt/sub-agent-mcp && docker compose --env-file .env.product
 ## Cloudflare
 
 1. remotely-managed Tunnel を新規作成し、token を secret file に保存する。
-2. 利用するPublic hostname（運用例では`subagent.full-ranges.com`）のserviceを
+2. 利用するPublic hostname（例: `mcp.example.com`）のserviceを
    `http://sub-agent-mcp:3000` にする。
 3. 同じ hostname に Cloudflare Access の MCP server application を作る。
 4. Allow policy を対象ユーザーだけに限定し、Advanced settings の Managed OAuth を有効にする。
