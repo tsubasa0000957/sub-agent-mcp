@@ -18,16 +18,16 @@
     "check": "npm run typecheck && npm run build && npm test"
   },
   "dependencies": {
-    "@modelcontextprotocol/node": "2.0.0",
-    "@modelcontextprotocol/server": "2.0.0",
+    "@modelcontextprotocol/node": "2.1.0",
+    "@modelcontextprotocol/server": "2.2.0",
     "jose": "6.2.12",
-    "openai": "7.10.0",
-    "zod": "4.5.4"
+    "openai": "7.25.0",
+    "zod": "4.6.5"
   },
   "devDependencies": {
-    "@modelcontextprotocol/client": "2.0.0",
+    "@modelcontextprotocol/client": "2.2.0",
     "@types/node": "24.10.1",
     "typescript": "7.0.2",
-    "vitest": "5.0.0"
+    "vitest": "5.0.2"
   }
 }
